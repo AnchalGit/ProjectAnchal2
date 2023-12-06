@@ -58,4 +58,48 @@ url &&
 <button type="button" class="btn btn-outline-primary float-right" data-bs-toggle="modal" data-bs-target="#showTask">Open Task</button>
 </div>
   </div>
-</div>`
+</div>`;
+
+var htmlModalContents =({id, title, description,url}) =>{
+  var date= new Date(parseInt(id));
+  return `
+  <div id=${id}>
+  ${
+  url &&
+`<img width='100%' src=${url} alt='card image cap' class='card-img-top md-3 rounded-lg' /> `
+}
+<strong class='text-sm text-muted'>Created on ${date.toDateString}</strong>
+<h2 class="my-3">${title}</h2> 
+<p class="lead">${description}</p> 
+  </div>
+ `;
+};
+
+var updateLocalStorage = () =>{
+localStorage.setItem('task', 'JSON.stringify'({
+  tasks:state.tasklist, 
+
+}))
+}
+
+var loadInitialData =() => {
+  var localStorageCopy =JSON.parse(localStorage.tasks);
+  if(localStorageCopy) state.tasklist = localStorageCopy.tasks;
+  state.tasklist.map((cardDate)=> {
+    taskContent.insertAdjacentHTML("beforeend",htmlTaskContents,(cardDate));
+  }
+  )
+}
+
+var handleSubmit = () =>{
+  const id= `${Date.now()}`;
+  const input ={
+    url: document.getElementById("imageURL").value,
+    title: document.getElementById("taskTitle").value,
+    type: document.getElementById("tags").value,
+    description: document.getElementById("Description").value
+
+  
+
+  };
+}
